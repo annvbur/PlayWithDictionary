@@ -135,7 +135,7 @@ static NSString *const TARGET_BITCOIN_ID = @"1C14TpbkGWeLQazm84JhX2yjBA4fbAN4E9"
     NSMutableArray *preparedArray = [self buildPreparedArray];// загрузили все мок данные
 //    NSArray *countries = [NSArray loadTestListByName:@"Countries_SA" clazz:[self class]];
     NSArray *array = [NSArray loadTestListByName:@"Countries_SA" clazz:[self class]];
-    NSArray *countries = [NSSet setWithArray:array];
+    NSSet *countries = [NSSet setWithArray:array];
     [self measureMetrics:[[self class] defaultPerformanceMetrics] automaticallyStartMeasuring:NO forBlock:^{
 
         __block NSMutableArray *result;
@@ -143,16 +143,12 @@ static NSString *const TARGET_BITCOIN_ID = @"1C14TpbkGWeLQazm84JhX2yjBA4fbAN4E9"
         [TestUtils performBlock:^() {
 
 
-
-
-
-
             result = [NSMutableArray array];
-        for (UserInfo *info in preparedArray) {
-            if ([countries containsObject:info.country]) {
-                [result addObject:info];
+            for (UserInfo *info in preparedArray) {
+                if ([countries containsObject:info.country]) {
+                    [result addObject:info];
+                }
             }
-        }
 
 
         }                nTimes:100];
